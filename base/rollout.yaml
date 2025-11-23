@@ -1,20 +1,21 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   labels:
     app: vote
     tier: front
-  name: vote
+  name: rollout-bg
 spec:
-  replicas: 4
+  replicas: 2
   selector:
     matchLabels:
       app: vote
-  strategy: 
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
-      maxSurge: 2
+  strategy:
+    blueGreen:
+      activeService: vote
+      previewService: vote-preview
+      autoPromotionEnabled: true
+      autoPromotionSeconds: 60
   template:
     metadata:
       labels:
@@ -24,7 +25,7 @@ spec:
       containers:
       - image: schoolofdevops/vote:v1
         name: vote
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         resources: 
           requests:
             cpu: "50m"
