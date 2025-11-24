@@ -4,7 +4,7 @@ metadata:
   labels:
     app: vote
     tier: front
-  name: rollout-bg
+  name: rollout-vote
 spec:
   replicas: 2
   selector:
@@ -23,7 +23,7 @@ spec:
         tier: front
     spec:
       containers:
-      - image: schoolofdevops/vote:v1
+      - image: docker-registry-remote.artifactory-espoo2.int.net.nokia.com/schoolofdevops/vote:v3
         name: vote
         imagePullPolicy: IfNotPresent
         resources: 
