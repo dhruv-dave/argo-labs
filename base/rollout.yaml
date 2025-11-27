@@ -23,7 +23,7 @@ spec:
         tier: front
     spec:
       containers:
-      - image: docker-registry-remote.artifactory-espoo2.int.net.nokia.com/schoolofdevops/vote:v2
+      - image: docker-registry-remote.artifactory-espoo2.int.net.nokia.com/schoolofdevops/vote:v3
         name: vote
         imagePullPolicy: IfNotPresent
         resources: 
